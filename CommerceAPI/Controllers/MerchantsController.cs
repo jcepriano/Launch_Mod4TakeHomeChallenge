@@ -1,7 +1,6 @@
 ﻿using CommerceAPI.DataAccess;
 using CommerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CommerceAPI.Controllers
 {
