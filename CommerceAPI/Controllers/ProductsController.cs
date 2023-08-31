@@ -48,11 +48,5 @@ namespace CommerceAPI.Controllers
 
             return new JsonResult(merchant);
         }
-
-        //[HttpPut("{id}")]
-        //public ActionResult EditProduct(Product product)
-        //{
-            
-        //}
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CommerceAPI.DataAccess;
 using CommerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommerceAPI.Controllers
 {
@@ -15,10 +16,34 @@ namespace CommerceAPI.Controllers
             _context = context;
         }
 
+        //[HttpGet]
+        //public ActionResult<IEnumerable<Merchant>> GetMerchants()
+        //{
+        //    return _context.Merchants;
+        //}
+        //[HttpGet]
+        //public ActionResult GetMerchants()
+        //{
+        //    var merchants = _context.Merchants
+        //        .Include(m => m.Products)
+        //        .AsEnumerable();
+
+        //    return new JsonResult(merchants);
+        //}
         [HttpGet]
-        public ActionResult<IEnumerable<Merchant>> GetMerchants()
+        public ActionResult GetMerchantsWithProducts()
         {
-            return _context.Merchants;
+            var merchantsWithProducts = _context.Merchants
+                .Include(m => m.Products)
+                .Select(m => new
+                {
+                    ID = m.Id,
+                    NAME = m.Name,
+                    PRODUCT = m.Products
+                })
+                .ToList();
+
+            return new JsonResult(merchantsWithProducts);
         }
 
         [HttpPost]
